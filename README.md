@@ -13,10 +13,10 @@ python glubglub.py example/itsy.svg output.svg
 So a picture is worth a thousand words...
 
 ### Source image
-![Source image (mooish leather)](./example/mooish.svg)
+<img src="./example/mooish.svg" alt="Source image (mooish leather)" width="256px" height="256px">
 
 ### Output image
-![Output image (mooish leather)](./output.svg)
+![Output image (mooish leather)](./example.svg)
 
 ## Troubleshooting
 
@@ -30,4 +30,4 @@ Open the source SVG in Illustrator. Ungroup everything. Save. Try again. Usually
 
 **The program is super slow!**
 
-Well, it's only meant to be run maybe once per asset. Ever. Ok, maybe twice if the output is all messed up. It still saves dozens of hours of going through the boring process of clipping a thousnad images... And hey, if you're not me, why are you using it?
+Well, it's only meant to be run maybe once per asset. Ever. Ok, maybe twice if the output is all messed up. It still saves dozens of hours of going through the boring process of clipping a thousnad images... And hey, if you're not me, why are you using it
