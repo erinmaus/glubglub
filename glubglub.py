@@ -14,7 +14,7 @@ def is_clip_outline(element: Shape):
     if not isinstance(element, Path):
         return False
     
-    if element.count_subpaths() != 2:
+    if element.count_subpaths() < 2:
         return False
     
     return is_outline(element)
@@ -123,7 +123,8 @@ def add_clip_paths(filename: str, clip_paths: list[Path]):
         clip_path_element.attrib[SVG_ATTR_ID] = clip_path.values.get(SVG_ATTR_ID)
 
         path_element = fromstring(clip_path.string_xml())
-        path_element.attrib.pop(SVG_ATTR_ID)
+        if SVG_ATTR_ID in path_element.attrib:
+            path_element.attrib.pop(SVG_ATTR_ID)
 
         clip_path_element.append(path_element)
         defs.append(clip_path_element)
@@ -135,7 +136,12 @@ def main(inputFilename, outputFilename):
     inputElements: list[Shape] = []
     
     for element in inputSvg.elements():
-        if isinstance(element, Path) and ((element.fill and element.fill.alpha and element.fill.alpha > 0) or (element.stroke_width and element.stroke_width > 0)):
+        if isinstance(element, Shape) and not ((element.fill and element.fill.alpha and element.fill.alpha > 0) or (element.stroke_width and element.stroke_width > 0)):
+            continue
+
+        if isinstance(element, Polygon):
+            inputElements.append(Path(element))
+        elif isinstance(element, Path):
             inputElements.append(element)
 
     input_islands = get_islands(inputElements)
