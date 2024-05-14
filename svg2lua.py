@@ -23,8 +23,6 @@ def _try_remove_point(points: list[tuple[float, float]], distance: float):
         other_points = list(filter(lambda p: np.linalg.norm(np.array(p) - np.array(point)) > distance or p == point, points))
 
         if len(other_points) < len(points):
-            print(len(points), len(points) - len(other_points))
-
             points.clear()
             points.extend(other_points)
 
